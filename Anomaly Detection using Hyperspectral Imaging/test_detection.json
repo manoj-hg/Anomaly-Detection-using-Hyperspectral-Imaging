@@ -1,0 +1,10 @@
+{
+  "lat": 19.0760,
+  "lon": 72.8777,
+  "use_gee": true,
+  "n_components": 3,
+  "encoding_dim": 16,
+  "use_vit": false,
+  "detect_clouds": true,
+  "apply_atmospheric_correction": false
+}

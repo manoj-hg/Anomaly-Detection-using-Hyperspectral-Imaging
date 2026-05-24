@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" href="data:,">
+    <title>AI-Powered Geospatial Anomaly Detection - Advanced Interface</title>
+    <link rel="stylesheet" href="styles_advanced.css?v=3.7">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- tsParticles -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Google Fonts for Cyberpunk Theme -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Custom Cursor Elements -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+    
+    <!-- Particles Container -->
+    <div id="tsparticles"></div>
+    
+    <link rel="icon" href="data:,">
+    <meta name="theme-color" content="#667eea">
+</head>
+<body class="light-mode">
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" id="closeLogin">&times;</span>
+            <h2><i class="fas fa-lock">.</i> Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="demo-credentials">Demo: admin/admin123 or user/user123</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-text">SYSTEM ONLINE</span>
+                    <span class="badge-dot"></span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">GEOSPATIAL</span>
+                    <span class="title-line title-accent">ANOMALY</span>
+                    <span class="title-line">DETECTION</span>
+                </h1>
+                <p class="hero-subtitle">AI-Powered Spectral Analysis for Camouflaged Object Detection</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-value">99.7%</span>
+                        <span class="stat-label">ACCURACY</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-value">0.3s</span>
+                        <span class="stat-label">RESPONSE</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-value">24/7</span>
+                        <span class="stat-label">MONITORING</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-large" data-page="detection">
+                        <i class="fas fa-radar"></i> START DETECTION
+                    </button>
+                    <button class="btn btn-secondary btn-large" data-page="dashboard">
+                        <i class="fas fa-th-large"></i> VIEW DASHBOARD
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div id="three-container" class="three-container"></div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="features-section">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-satellite"></i>
+                </div>
+                <h3>SPECTRAL ANALYSIS</h3>
+                <p>Advanced multi-spectral image processing for detecting camouflaged objects</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI MODELS</h3>
+                <p>Isolation Forest & Autoencoder fusion for accurate anomaly detection</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>GLOBAL COVERAGE</h3>
+                <p>Real-time geospatial monitoring with satellite imagery</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>MILITARY GRADE</h3>
+                <p>Designed for defense and security applications</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>AGRICULTURE</h3>
+                <p>Crop health monitoring and field analysis</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h3>GEOLOGICAL</h3>
+                <p>Mineral deposit surveying and geological mapping</p>
+            </div>
+        </section>
+
+        <!-- D3 Visualization Section -->
+        <section class="visualization-section">
+            <div class="frame frame-scores">
+                <div class="frame-header">
+                    <h3><i class="fas fa-chart-area"></i> SPECTRAL HEATMAP</h3>
+                </div>
+                <div class="frame-content">
+                    <div class="viz-controls">
+                        <label>
+                            <input type="range" id="heatmap-intensity" min="0" max="100" value="50">
+                            <span>Intensity</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="heatmap-animate" checked>
+                            <span>Animate</span>
+                        </label>
+                    </div>
+                    <div id="d3-heatmap"></div>
+                </div>
+            </div>
+            <div class="frame frame-scores">
+                <div class="frame-header">
+                    <h3><i class="fas fa-wave-square"></i> HYPERSPECTRAL SIGNATURES</h3>
+                </div>
+                <div class="frame-content">
+                    <div class="viz-controls">
+                        <label>
+                            <input type="checkbox" id="show-vegetation" checked>
+                            <span>Vegetation</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="show-water" checked>
+                            <span>Water</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="show-soil" checked>
+                            <span>Soil</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="show-urban" checked>
+                            <span>Urban</span>
+                        </label>
+                    </div>
+                    <div id="hyperspectral-viz"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-satellite-dish"></i> SYSTEM DASHBOARD</h1>
+                <p class="subtitle">Real-time Monitoring & Analysis Interface</p>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="loginBtn">
+                        <i class="fas fa-user"></i> Login
+                    </button>
+                    <button class="btn btn-secondary" id="logoutBtn" style="display: none;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <button class="nav-btn active" data-page="dashboard">
+                <i class="fas fa-th-large"></i> Dashboard
+            </button>
+            <button class="nav-btn" data-page="detection">
+                <i class="fas fa-radar"></i> Detection
+            </button>
+            <button class="nav-btn" data-page="analysis">
+                <i class="fas fa-chart-line"></i> Analysis
+            </button>
+            <button class="nav-btn" data-page="defense">
+                <i class="fas fa-shield-alt"></i> Defense
+            </button>
+            <button class="nav-btn" data-page="agriculture">
+                <i class="fas fa-seedling"></i> Agriculture
+            </button>
+            <button class="nav-btn" data-page="geological">
+                <i class="fas fa-mountain"></i> Geological
+            </button>
+        </nav>
+
+        <!-- Page: Dashboard -->
+        <main class="page page-dashboard active" id="page-dashboard">
+            <div class="dashboard-grid">
+                <!-- Frame 1: Map -->
+                <div class="frame frame-datasource">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-database"></i> Data Source</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="data-info">
+                            <div class="info-item">
+                                <label>Source:</label>
+                                <span id="dataSource">-</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Processing Time:</label>
+                                <span id="processingTime">-</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Anomalies:</label>
+                                <span id="anomalyCount">-</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Anomaly %:</label>
+                                <span id="anomalyPercentage">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame 3: Quick Stats -->
+                <div class="frame frame-stats">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-chart-pie"></i> Quick Stats</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="stat-item">
+                            <label>Total Detections:</label>
+                            <span id="totalDetections">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <label>Avg Processing Time:</label>
+                            <span id="avgProcessingTime">0s</span>
+                        </div>
+                        <div class="stat-item">
+                            <label>Success Rate:</label>
+                            <span id="successRate">100%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame 4: Score Distribution (also on dashboard) -->
+                <div class="frame frame-scores">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-chart-line"></i> Score Distribution</h3>
+                    </div>
+                    <div class="frame-content">
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Page: Detection -->
+        <main class="page page-detection" id="page-detection">
+            <div class="dashboard-grid">
+                <!-- Frame 1: Detection Parameters -->
+                <div class="frame frame-params">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-sliders-h"></i> Detection Parameters</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="param-group">
+                            <label>Location Search</label>
+                            <div class="location-search-wrapper">
+                                <input type="text" id="locationSearch" placeholder="Search any location worldwide (e.g., New York, Tokyo, London)" autocomplete="off">
+                                <div id="locationSuggestions" class="location-suggestions"></div>
+                            </div>
+                            <button class="btn btn-secondary" id="searchLocationBtn">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                        <div class="param-group">
+                            <label>Latitude</label>
+                            <input type="number" id="latitude" step="0.000001" min="-90" max="90" value="40.7128">
+                        </div>
+                        <div class="param-group">
+                            <label>Longitude</label>
+                            <input type="number" id="longitude" step="0.000001" min="-180" max="180" value="-74.0060">
+                        </div>
+                        <button class="btn btn-primary" id="getLocationBtn" style="width: 100%;">
+                            <i class="fas fa-location-arrow"></i> Get My Location
+                        </button>
+                        <div class="param-group">
+                            <label>PCA Components: <span id="nComponentsValue">10</span></label>
+                            <input type="range" id="nComponents" min="5" max="20" value="10">
+                        </div>
+                        <div class="param-group">
+                            <label>Encoding Dim: <span id="encodingDimValue">8</span></label>
+                            <input type="range" id="encodingDim" min="4" max="16" value="8">
+                        </div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="useGee" checked>
+                                <span>Use GEE</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="enableCache" disabled>
+                                <span>Enable Cache</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="useVit" checked>
+                                <span>Use ViT Model</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="useEnsemble" checked>
+                                <span>Use Ensemble</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="detectClouds" checked>
+                                <span>Detect Clouds</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="applyAtmosphericCorrection" checked>
+                                <span>Atmospheric Correction</span>
+                            </label>
+                        </div>
+                        <div class="quick-locations">
+                            <button class="location-btn" data-lat="19.0760" data-lon="72.8777">Mumbai</button>
+                            <button class="location-btn" data-lat="28.7041" data-lon="77.1025">Delhi</button>
+                            <button class="location-btn" data-lat="12.9716" data-lon="77.5946">Bangalore</button>
+                            <button class="location-btn" data-lat="17.3850" data-lon="78.4867">Hyderabad</button>
+                            <button class="location-btn" data-lat="22.5726" data-lon="88.3639">Kolkata</button>
+                        </div>
+                        <button class="btn btn-primary btn-large" id="detectBtn">
+                            <i class="fas fa-radar"></i> Run Detection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Frame 2: Detection Map -->
+                <div class="frame frame-map">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-map-marked-alt"></i> Live Map</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="detection-map-container">
+                            <div id="detectionMap"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame 4: Satellite Image -->
+                <div class="frame frame-satellite">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-satellite"></i> Satellite Image</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="satellite-image-container">
+                            <img id="satelliteImage" src="" alt="Satellite Image" style="display: none;">
+                            <div id="satelliteLoading" class="loading-spinner">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <span>Loading satellite image...</span>
+                            </div>
+                            <div id="satelliteError" class="error-message" style="display: none;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>Failed to load satellite image</span>
+                            </div>
+                            <div id="imageCoordinates" class="image-coordinates" style="display: none;">
+                                <span>Lat: <span id="cursorLat">--</span></span>
+                                <span>Lon: <span id="cursorLon">--</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame 3: Progress -->
+                <div class="frame frame-progress">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-tasks"></i> Progress</h3>
+                        <div class="connection-status" id="connectionStatus">
+                            <span class="status-dot disconnected"></span>
+                            <span class="status-text">Disconnected</span>
+                        </div>
+                    </div>
+                    <div class="frame-content">
+                        <div class="progress-steps">
+                            <div class="progress-step" id="step-loading">
+                                <div class="step-icon"><i class="fas fa-download"></i></div>
+                                <div class="step-label">Loading</div>
+                            </div>
+                            <div class="progress-step" id="step-preprocessing">
+                                <div class="step-icon"><i class="fas fa-cogs"></i></div>
+                                <div class="step-label">Preprocessing</div>
+                            </div>
+                            <div class="progress-step" id="step-detecting">
+                                <div class="step-icon"><i class="fas fa-search"></i></div>
+                                <div class="step-label">Detecting</div>
+                            </div>
+                            <div class="progress-step" id="step-fusing">
+                                <div class="step-icon"><i class="fas fa-object-group"></i></div>
+                                <div class="step-label">Fusing</div>
+                            </div>
+                            <div class="progress-step" id="step-complete">
+                                <div class="step-icon"><i class="fas fa-check"></i></div>
+                                <div class="step-label">Complete</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="progressBar"></div>
+                            <div class="progress-text" id="progressText">0%</div>
+                        </div>
+                        <div class="log-container" id="logContainer">
+                            <div class="log-entry">System ready</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame 3: Scanning Animation -->
+                <div class="frame frame-scanning">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-satellite-dish"></i> Satellite Scan</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="scanning-container">
+                            <div class="scan-grid">
+                                <div class="scan-line scan-line-1"></div>
+                                <div class="scan-line scan-line-2"></div>
+                                <div class="scan-line scan-line-3"></div>
+                                <div class="scan-line scan-line-4"></div>
+                            </div>
+                            <div class="scan-circle">
+                                <div class="scan-circle-inner"></div>
+                                <div class="scan-circle-inner-2"></div>
+                            </div>
+                            <div class="scan-target">
+                                <div class="scan-target-dot"></div>
+                            </div>
+                            <div class="scan-data">
+                                <div class="scan-data-item">
+                                    <span class="scan-label">TARGET:</span>
+                                    <span class="scan-value" id="scanTarget">SEARCHING</span>
+                                </div>
+                                <div class="scan-data-item">
+                                    <span class="scan-label">STATUS:</span>
+                                    <span class="scan-value" id="scanStatus">IDLE</span>
+                                </div>
+                                <div class="scan-data-item">
+                                    <span class="scan-label">SIGNAL:</span>
+                                    <span class="scan-value" id="scanSignal">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame 5: Advanced Analysis -->
+                <div class="frame frame-advanced">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-microscope"></i> Advanced Analysis</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="analysis-stats">
+                            <div class="stat-item">
+                                <label>Cloud Coverage</label>
+                                <span class="stat-value" id="cloudCoverage">--%</span>
+                            </div>
+                            <div class="stat-item">
+                                <label>NDVI</label>
+                                <span class="stat-value" id="ndviValue">--</span>
+                            </div>
+                            <div class="stat-item">
+                                <label>NDWI</label>
+                                <span class="stat-value" id="ndwiValue">--</span>
+                            </div>
+                            <div class="stat-item">
+                                <label>Clusters</label>
+                                <span class="stat-value" id="numClusters">--</span>
+                            </div>
+                            <div class="stat-item">
+                                <label>Material</label>
+                                <span class="stat-value" id="materialIdentified">--</span>
+                            </div>
+                            <div class="stat-item">
+                                <label>Data Source</label>
+                                <span class="stat-value" id="dataSource">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Page: Analysis -->
+        <main class="page page-analysis" id="page-analysis">
+            <div class="dashboard-grid">
+                <!-- Frame 1: Image Analysis -->
+                <div class="frame frame-image">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-images"></i> Image Analysis</h3>
+                        <div class="image-tabs">
+                            <button class="tab-btn active" data-view="rgb">RGB</button>
+                            <button class="tab-btn" data-view="heatmap">Heat</button>
+                            <button class="tab-btn" data-view="iso">ISO</button>
+                            <button class="tab-btn" data-view="ae">AE</button>
+                            <button class="tab-btn" data-view="vit">ViT</button>
+                            <button class="tab-btn" data-view="binary">Bin</button>
+                            <button class="tab-btn" data-view="overlay">Ovr</button>
+                            <button class="tab-btn" data-view="clusters">Clusters</button>
+                        </div>
+                    </div>
+                    <div class="frame-content">
+                        <div class="image-display" id="imageDisplay">
+                            <div class="placeholder-message" id="imagePlaceholder">
+                                <i class="fas fa-satellite"></i>
+                                <p>Run detection to view image analysis</p>
+                            </div>
+                            <img id="resultImage" src="" alt="Detection Result" style="display: none;">
+                        </div>
+                        <div class="image-actions">
+                            <button class="btn btn-secondary" id="downloadImage">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-secondary" id="fullscreenBtn">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame 2: Spectral Band Analysis -->
+                <div class="frame frame-spectral">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-wave-square"></i> Spectral Bands</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="spectral-bands">
+                            <div class="band-item">
+                                <label>Blue</label>
+                                <canvas id="bandBlue"></canvas>
+                                <div class="band-placeholder">No data</div>
+                            </div>
+                            <div class="band-item">
+                                <label>Green</label>
+                                <canvas id="bandGreen"></canvas>
+                                <div class="band-placeholder">No data</div>
+                            </div>
+                            <div class="band-item">
+                                <label>Red</label>
+                                <canvas id="bandRed"></canvas>
+                                <div class="band-placeholder">No data</div>
+                            </div>
+                            <div class="band-item">
+                                <label>NIR</label>
+                                <canvas id="bandNIR"></canvas>
+                                <div class="band-placeholder">No data</div>
+                            </div>
+                            <div class="band-item">
+                                <label>SWIR1</label>
+                                <canvas id="bandSWIR1"></canvas>
+                                <div class="band-placeholder">No data</div>
+                            </div>
+                            <div class="band-item">
+                                <label>SWIR2</label>
+                                <canvas id="bandSWIR2"></canvas>
+                                <div class="band-placeholder">No data</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Page: Defense -->
+        <main class="page page-defense" id="page-defense">
+            <div class="dashboard-grid">
+                <!-- Frame 1: Defense Detection Parameters -->
+                <div class="frame frame-params">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-shield-alt"></i> Defense Detection Parameters</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="param-group">
+                            <label>Target Type</label>
+                            <select id="defenseTargetType">
+                                <option value="camouflage">Camouflage Netting</option>
+                                <option value="vehicle">Military Vehicle</option>
+                                <option value="structure">Concrete Structure</option>
+                                <option value="all">All Defense Targets</option>
+                            </select>
+                        </div>
+                        <div class="param-group">
+                            <label>Latitude</label>
+                            <input type="number" id="defenseLatitude" step="0.000001" min="-90" max="90" value="40.7128">
+                        </div>
+                        <div class="param-group">
+                            <label>Longitude</label>
+                            <input type="number" id="defenseLongitude" step="0.000001" min="-180" max="180" value="-74.0060">
+                        </div>
+                        <div class="param-group">
+                            <button class="btn btn-secondary" id="defenseGetLocationBtn">
+                                <i class="fas fa-location-arrow"></i> Get Current Location
+                            </button>
+                        </div>
+                        <div class="param-group">
+                            <label>Sensitivity</label>
+                            <input type="range" id="defenseSensitivity" min="1" max="10" value="7">
+                            <span id="defenseSensitivityValue">7</span>
+                        </div>
+                        <div class="param-group">
+                            <label>
+                                <input type="checkbox" id="defenseUseViT" checked>
+                                Use Vision Transformer
+                            </label>
+                        </div>
+                        <div class="param-group">
+                            <label>
+                                <input type="checkbox" id="defenseUseEnsemble" checked>
+                                Use Ensemble Detection
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" id="defenseDetectBtn">
+                            <i class="fas fa-crosshairs"></i> Run Defense Detection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Frame 2: Defense Map -->
+                <div class="frame frame-map">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-map"></i> Target Map</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div id="defenseMap" class="map-container"></div>
+                    </div>
+                </div>
+
+                <!-- Frame 3: Defense Results -->
+                <div class="frame frame-results">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-list"></i> Detection Results</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="results-list" id="defenseResults">
+                            <div class="placeholder-message">
+                                <i class="fas fa-shield-alt"></i>
+                                <p>Run detection to view defense targets</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Page: Agriculture -->
+        <main class="page page-agriculture" id="page-agriculture">
+            <div class="dashboard-grid">
+                <!-- Frame 1: Agriculture Parameters -->
+                <div class="frame frame-params">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-seedling"></i> Agriculture Parameters</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="param-group">
+                            <label>Crop Type</label>
+                            <select id="agriCropType">
+                                <option value="vegetation">General Vegetation</option>
+                                <option value="stressed">Stressed Crops</option>
+                                <option value="soil">Soil Analysis</option>
+                                <option value="all">All Agriculture</option>
+                            </select>
+                        </div>
+                        <div class="param-group">
+                            <label>Latitude</label>
+                            <input type="number" id="agriLatitude" step="0.000001" min="-90" max="90" value="40.7128">
+                        </div>
+                        <div class="param-group">
+                            <label>Longitude</label>
+                            <input type="number" id="agriLongitude" step="0.000001" min="-180" max="180" value="-74.0060">
+                        </div>
+                        <div class="param-group">
+                            <button class="btn btn-secondary" id="agriGetLocationBtn">
+                                <i class="fas fa-location-arrow"></i> Get Current Location
+                            </button>
+                        </div>
+                        <div class="param-group">
+                            <label>
+                                <input type="checkbox" id="agriCalculateNDVI" checked>
+                                Calculate NDVI
+                            </label>
+                        </div>
+                        <div class="param-group">
+                            <label>
+                                <input type="checkbox" id="agriCalculateNDWI" checked>
+                                Calculate NDWI
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" id="agriDetectBtn">
+                            <i class="fas fa-leaf"></i> Analyze Crops
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Frame 2: Agriculture Map -->
+                <div class="frame frame-map">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-map"></i> Field Map</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div id="agriMap" class="map-container"></div>
+                    </div>
+                </div>
+
+                <!-- Frame 3: Vegetation Indices -->
+                <div class="frame frame-indices">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-chart-bar"></i> Vegetation Indices</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="index-display">
+                            <div class="index-item">
+                                <label>NDVI:</label>
+                                <span id="ndviValue">--</span>
+                            </div>
+                            <div class="index-item">
+                                <label>NDWI:</label>
+                                <span id="ndwiValue">--</span>
+                            </div>
+                            <div class="index-item">
+                                <label>Health Status:</label>
+                                <span id="healthStatus">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Page: Geological -->
+        <main class="page page-geological" id="page-geological">
+            <div class="dashboard-grid">
+                <!-- Frame 1: Geological Parameters -->
+                <div class="frame frame-params">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-mountain"></i> Geological Survey Parameters</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="param-group">
+                            <label>Mineral Type</label>
+                            <select id="geoMineralType">
+                                <option value="granite">Granite</option>
+                                <option value="limestone">Limestone</option>
+                                <option value="iron_ore">Iron Ore</option>
+                                <option value="mineral">General Mineral</option>
+                                <option value="all">All Minerals</option>
+                            </select>
+                        </div>
+                        <div class="param-group">
+                            <label>Latitude</label>
+                            <input type="number" id="geoLatitude" step="0.000001" min="-90" max="90" value="40.7128">
+                        </div>
+                        <div class="param-group">
+                            <label>Longitude</label>
+                            <input type="number" id="geoLongitude" step="0.000001" min="-180" max="180" value="-74.0060">
+                        </div>
+                        <div class="param-group">
+                            <button class="btn btn-secondary" id="geoGetLocationBtn">
+                                <i class="fas fa-location-arrow"></i> Get Current Location
+                            </button>
+                        </div>
+                        <div class="param-group">
+                            <label>
+                                <input type="checkbox" id="geoUseSAR" checked>
+                                Use SAR Data
+                            </label>
+                        </div>
+                        <div class="param-group">
+                            <label>
+                                <input type="checkbox" id="geoTemporal" checked>
+                                Temporal Analysis
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" id="geoDetectBtn">
+                            <i class="fas fa-search-location"></i> Survey Minerals
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Frame 2: Geological Map -->
+                <div class="frame frame-map">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-map"></i> Survey Map</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div id="geoMap" class="map-container"></div>
+                    </div>
+                </div>
+
+                <!-- Frame 3: Mineral Results -->
+                <div class="frame frame-results">
+                    <div class="frame-header">
+                        <h3><i class="fas fa-gem"></i> Mineral Deposits</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="results-list" id="geoResults">
+                            <div class="placeholder-message">
+                                <i class="fas fa-mountain"></i>
+                                <p>Run survey to view mineral deposits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loadingText">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="animations.js?v=3.4"></script>
+    <script src="app_advanced.js?v=5.8"></script>
+</body>
+</html>
