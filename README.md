@@ -25,7 +25,7 @@ This project now includes **cutting-edge features** making it one of the most co
 - **Data Fusion** - Combine multiple satellite sources
 - **Cloud Masking** - Automatic cloud detection and removal
 - **Atmospheric Correction** - Dark object subtraction
-
+- 
 ### ⏱️ Temporal Analysis
 - **Change Detection** - Detect changes over time
 - **Trend Analysis** - Identify gradual changes
